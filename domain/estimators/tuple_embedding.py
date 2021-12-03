@@ -246,13 +246,13 @@ class LookupDataset(Dataset):
         Loads a new domain_df such that __getitem__ and other methods work with
         the new cells.
         """
-        if not np.isin(domain_df['attribute'].unique(), self._train_cat_attrs).all():
-            logging.error("not all cat. target attributes of new domain DF has "
-                          "been used to train model before."
-                          "\nDomain target attrs: %s\nTrained target attrs: %s",
-                    sorted(domain_df['attribute'].unique()),
-                    self._train_cat_attrs)
-            raise Exception()
+        # if not np.isin(domain_df['attribute'].unique(), self._train_cat_attrs).all():
+        #     logging.error("not all cat. target attributes of new domain DF has "
+        #                   "been used to train model before."
+        #                   "\nDomain target attrs: %s\nTrained target attrs: %s",
+        #             sorted(domain_df['attribute'].unique()),
+        #             self._train_cat_attrs)
+        #     raise Exception()
 
         self._vid_to_idx = {vid: idx for idx, vid in enumerate(domain_df['_vid_'].values)}
         # LookupDataset always gets its information on the domain_df from this
@@ -937,7 +937,7 @@ class TupleEmbedding(Estimator, torch.nn.Module):
         self.domain_recs = self.domain_df.to_records()
         if load_into_ds:
             self._dataset.load_domain_df(domain_df)
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
 
 
     def _get_combined_init_vec(self, init_cat_idxs, init_numvals, init_nummasks, attr_idxs):
