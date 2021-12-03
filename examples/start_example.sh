@@ -2,7 +2,8 @@
 # Set & move to home directory
 source ../set_env.sh
 
-script="holoclean_repair_example.py"
+script="holoclean_repair_example_mod.py"
+#script="holoclean_repair_example.py"
 if [ $# -eq 1 ] ; then
   script="$1"
 fi
