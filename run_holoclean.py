@@ -1,6 +1,8 @@
 import argparse
 import os
+import os.path as osp
 import sys
+import json
 # sys.path.append('../../holoclean')
 
 import pandas as pd
@@ -67,6 +69,7 @@ if __name__ == '__main__':
     ds_name = args.ds_name
     attr_idx = args.attr_idx
     db_name_suffix = args.db_name_suffix
+    # error_seed = ''
     error_seed = args.error_seed if ds_name not in ds_natural else ''
     seed = args.seed
     validate_epoch = args.validate_epoch
@@ -79,7 +82,8 @@ if __name__ == '__main__':
     cor_strength = args.cor
     embed_dropout = args.embed_dropout
 
-    dsdata = ds_mdata[ds_name]
+    dsdata = json.load(open(osp.join('testdata/meta_data/', ds_name + '.json')))
+    # dsdata = ds_mdata[ds_name]
     target_attrs = dsdata['target_attrs']
     num_attrs = dsdata['num_attrs']
     num_attr_groups = dsdata['num_attr_groups']
@@ -136,8 +140,9 @@ if __name__ == '__main__':
     # if dc_file is not None:
     #     errors_fpath_toks += [dc_file.split('.txt')[0]]
 
-    dump_dir = '/home/spoutnik23/phd/holoclean/dump-dir/%s' % ds_name
-    assert os.path.isdir(dump_dir)
+    dump_dir = 'holoclean/dump-dir/%s' % ds_name
+    os.makedirs(dump_dir, exist_ok=True)
+    # assert os.path.isdir(dump_dir)
 
     errors_fpath = '%s/%s_errors.pkl' % (dump_dir, '_'.join(map(str, errors_fpath_toks)))
     dom_fpath = '%s/%s_domain.pkl' % (dump_dir, '_'.join(map(str, dom_fpath_toks)))
