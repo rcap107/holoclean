@@ -185,7 +185,7 @@ if __name__ == '__main__':
 
 ### Load training data and denial constraints
     hc.load_data(raw_prefix.replace('.', '_').replace(' ', '_')[:50],
-                 '{data_dir}/{pre}{error_seed}.csv'.format(data_dir=data_dir, pre=raw_prefix, error_seed=error_seed),
+                 '{data_dir}/{pre}.csv'.format(data_dir=data_dir, pre=raw_prefix, error_seed=error_seed),
                  numerical_attrs=num_attrs,
                  )
 
